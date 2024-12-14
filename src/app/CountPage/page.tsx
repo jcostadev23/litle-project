@@ -16,7 +16,10 @@ export default function Count() {
     <div className={styles.customGrid}>
       <h2>Count Page</h2>
       <h4>Count: {value}</h4>
-      <div className={styles.buttonContainer}>
+      <div
+        data-testid="cypress-botton-container"
+        className={styles.buttonContainer}
+      >
         <Button label="Decrement" onClick={handleDecrement} />
         <Button label="Increment" onClick={handleIncrement} />
       </div>

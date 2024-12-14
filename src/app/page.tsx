@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className={styles.customGrid}>
       <main className={styles.customFlex}>
-        <h1>My litle project</h1>
+        <h1 data-testid="cypress-title">My litle project</h1>
         <a href="/CountPage">Count Page</a>
       </main>
       <footer>
