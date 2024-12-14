@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Button from "../components/Button";
-import styles from "../page.module.css";
-import { decrementCounter, incrementCounter } from "../utils/counter";
 import { useState } from "react";
+import Button from "../components/Button";
+import styles from "../Page.module.css";
+import { decrementCounter, incrementCounter } from "../utils/counter";
 
 export default function Count() {
   const router = useRouter();

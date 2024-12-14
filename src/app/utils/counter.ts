@@ -1,5 +1,5 @@
-const incrementCounter = (value = 0) => ++value;
+const incrementCounter = (value: number) => ++value;
 
-const decrementCounter = (value = 0) => --value;
+const decrementCounter = (value: number) => --value;
 
 export { incrementCounter, decrementCounter };
