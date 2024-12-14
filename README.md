@@ -26,8 +26,9 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## This project is to practice unit testes, end2end testes, storybook and stages of deployment
 
-- Its a title a button and a count.
-- When you click the buton it will increment the count.
+- Its a title a button and a footer.
+- Secound page is a title a value button to decrement and increment and one to return to home page.
+- When you click the buton increment or decrement the value will change.
 - Very simple way to learn about testes and storybook.
 
 ## Deploy on Vercel
