@@ -1,6 +1,4 @@
-"use client";
-
-import styles from "./Button.module.css";
+import styles from "./button.module.css";
 
 type Props = {
   label: string;
