@@ -23,6 +23,7 @@ export default function Count() {
         <Button label="Decrement" onClick={handleDecrement} />
         <Button label="Increment" onClick={handleIncrement} />
       </div>
+      Simple testing deployments
       <Button
         label="Home Page"
         backgroundColor="danger"
