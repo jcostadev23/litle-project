@@ -55,6 +55,9 @@ jobs:
       - name: Intall Dependecies
         run: npm ci
 
+      - name: Build project
+        run: npm run build
+
       - name: Start the application
         run: npm run start
         env:
