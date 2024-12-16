@@ -55,16 +55,13 @@ jobs:
       - name: Intall Dependecies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
-
       - name: Start the application
-        run: npm run start
+        run: npm run start &
         env:
           NODE_ENV: test
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:8080 # Adjust the URL if needed
+        run: npx wait-on http://localhost:8080
 
       - name: Run Cypress tests
         run: npx cypress open
