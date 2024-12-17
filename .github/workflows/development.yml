@@ -47,6 +47,7 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
         with:
@@ -55,16 +56,13 @@ jobs:
       - name: Intall Dependecies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
-
       - name: Start the application
-        run: npm run start
+        run: npm run start &
         env:
           NODE_ENV: test
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:8080 # Adjust the URL if needed
+        run: npx wait-on http://localhost:8080
 
       - name: Run Cypress tests
         run: npx cypress open
