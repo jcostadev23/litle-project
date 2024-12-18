@@ -1,0 +1,33 @@
+.dropdownLabel {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #333;
+}
+
+.dropdownSelect {
+  width: 200px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdownSelect:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.dropdownSelect option {
+  padding: 10px;
+}
+
+.dropdownSelect:hover {
+  border-color: #007bff;
+  background-color: #e7f1ff;
+}
