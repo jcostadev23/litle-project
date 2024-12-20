@@ -9,8 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "npx jest",
-    "posttest": "npx kill-port 8080"
+    "test": "npx jest"
   },
   "dependencies": {
     "next": "15.1.0",
