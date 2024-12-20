@@ -56,6 +56,14 @@ jobs:
       - name: Intall Dependecies
         run: npm ci
 
+      - name: Start the application
+        run: npm run start &
+        env:
+          NODE_ENV: test
+
+      - name: Wait for the app to be ready
+        run: npx wait-on http://localhost:3000
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
