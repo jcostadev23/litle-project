@@ -50,8 +50,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependecies
-        run: npm ci
+      - name: Download dependecies
+        uses: actions/download-artifact@v4
+        with:
+          name: dependecies
 
       - name: Build project
         run: npm run build
