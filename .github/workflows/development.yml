@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{runner.os}}-node-${{hashFiles('package-lock.json')}}
+          restore-keys: |
+            ${{runner.os}}-node-
+
       - name: Install dependencies
         run: npm ci
-
-      - name: Archive dependencies
-        uses: actions/upload-artifact@v4
-        with:
-          name: dependencies
-          path: node_modules
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -29,10 +32,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v3
         with:
-          name: dependencies
+          path: node_modules
+          key: ${{runner.os}}-node-${{hashFiles('package-lock.json')}}
+          restore-keys: |
+            ${{runner.os}}-node-
+
+      - name: Dependencies
+        run: npm ci
 
       - name: Check Jest installation
         run: ls node_modules/.bin
@@ -50,10 +59,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v3
         with:
-          name: dependencies
+          path: node_modules
+          key: ${{runner.os}}-node-${{hashFiles('package-lock.json')}}
+          restore-keys: |
+            ${{runner.os}}-node-
+
+      - name: Dependencies
+        run: npm ci
 
       - name: Build project
         run: npm run build
