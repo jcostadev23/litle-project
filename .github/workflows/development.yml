@@ -14,7 +14,7 @@ jobs:
         run: npm ci
 
       - name: Upload node_modules artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: save_node_modules
           path: ./node_modules/
@@ -30,12 +30,9 @@ jobs:
           node-version: 20
 
       - name: Download node_modules artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: save_node_modules
-
-      - name: Test artifact
-        run: ls -R
 
       - name: Check Jest installation
         run: ls node_modules/.bin
@@ -54,7 +51,7 @@ jobs:
           node-version: 20
 
       - name: Download node_modules artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: save_node_modules
 
@@ -65,7 +62,7 @@ jobs:
         run: ls -l .next
 
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: save_next
           path: .next/
@@ -82,14 +79,7 @@ jobs:
           node-version: 20
 
       - name: Download node_modules artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: save_node_modules
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: save_next
+        uses: actions/download-artifact@v3
 
       - name: Start the application
         run: npm run start &
