@@ -8,29 +8,34 @@ on:
 jobs:
   install-dependencies:
     runs-on: ubuntu-latest
-    container:
-      image: node:20
     steps:
       - uses: actions/checkout@v3
       - name: Install dependecies
         run: npm ci
 
-      - name: Archive production artifacts
+      - name: Upload node_modules artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: node_modules
-          path: node_modules
+          name: save_node_modules
+          path: ./node_modules/
 
   unit-tests:
     runs-on: ubuntu-latest
     needs: install-dependencies
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
       - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
-          name: node_modules
+          name: save_node_modules
+
+      - name: Test artifact
+        run: ls -R
 
       - name: Check Jest installation
         run: ls node_modules/.bin
@@ -43,20 +48,27 @@ jobs:
     needs: install-dependencies
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
       - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
-          name: node_modules
+          name: save_node_modules
 
       - name: Build project
         run: npm run build
 
+      - name: Verify .next before upload
+        run: ls -l .next
+
       - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: .next
-          path: .next
+          name: save_next
+          path: .next/
 
   e2e-tests:
     runs-on: ubuntu-latest
@@ -64,16 +76,20 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
       - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
-          name: node_modules
+          name: save_node_modules
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: .next
+          name: save_next
 
       - name: Start the application
         run: npm run start &
