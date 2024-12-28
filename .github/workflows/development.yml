@@ -8,11 +8,9 @@ on:
 jobs:
   install-dependencies:
     runs-on: ubuntu-latest
-    container:
-      image: node:20
     steps:
       - uses: actions/checkout@v3
-      - name: Intall dependecies
+      - name: Install dependecies
         run: npm ci
 
   unit-tests:
@@ -20,10 +18,12 @@ jobs:
     needs: install-dependencies
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Intall Dependecies
+      - name: Install dependecies
         run: npm ci
 
       - name: Check Jest installation
@@ -37,8 +37,12 @@ jobs:
     needs: install-dependencies
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-      - name: Intall Dependecies
+      - name: Install dependecies
         run: npm ci
 
       - name: Build project
@@ -47,24 +51,27 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Intall Dependecies
+      - name: Install dependecies
         run: npm ci
 
-      - name: Build project
+      - name: Install production build
         run: npm run build
 
       - name: Start the application
-        run: npm run start
+        run: npm run start &
         env:
           NODE_ENV: test
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:8080 # Adjust the URL if needed
+        run: npx wait-on http://localhost:3000
 
-      - name: Run Cypress tests
-        run: npx cypress open
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
