@@ -12,15 +12,14 @@ jobs:
       image: node:20
     steps:
       - uses: actions/checkout@v3
-      - name: Intall dependecies
+      - name: Install dependecies
         run: npm ci
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
           name: node_modules
-          path: |
-            node_modules
+          path: node_modules
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -28,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download a single artifact
+      - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
           name: node_modules
@@ -45,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download a single artifact
+      - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
           name: node_modules
@@ -53,12 +52,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Archive production artifacts
+      - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: .next
-          path: |
-            .next
+          path: .next
 
   e2e-tests:
     runs-on: ubuntu-latest
@@ -67,12 +65,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download a single artifact
+      - name: Download node_modules artifact
         uses: actions/download-artifact@v4
         with:
           name: node_modules
 
-      - name: Download a single artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: .next
@@ -87,6 +85,3 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
