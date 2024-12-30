@@ -17,39 +17,52 @@ describe("end2end testes", () => {
     cy.visit("http://localhost:3000/CountPage");
     cy.url().should("include", "/CountPage");
 
-    cy.get("h2").should("exist").should("have.text", "Count Page");
-    cy.get("h4").should("exist").should("have.value", "");
+    cy.get('[data-testid="count-page-title"]')
+      .should("exist")
+      .should("have.text", "Pagina de Contar");
+
+    cy.get('[data-testid="count-value"]')
+      .should("exist")
+      .should("have.value", "");
 
     cy.get('[data-testid="cypress-botton-container"]').should("exist");
 
-    cy.contains("Increment").should("exist");
-    cy.contains("Decrement").should("exist");
-    cy.contains("Home Page").should("exist");
+    cy.get('[data-testid="increment"]').should("exist");
+    cy.get('[data-testid="decrement"]').should("exist");
+    cy.get('[data-testid="homePage"]').should("exist");
   });
 
   it("increment the count", () => {
     cy.visit("http://localhost:3000/CountPage");
 
-    cy.contains("Increment").should("exist").click();
-    cy.get("h4").should("exist").should("have.text", "Count: 1");
-    cy.contains("Increment").should("exist").click();
-    cy.contains("Increment").should("exist").click();
-    cy.get("h4").should("exist").should("have.text", "Count: 3");
+    cy.get('[data-testid="increment"]').should("exist").click();
+    cy.get('[data-testid="count-value"]')
+      .should("exist")
+      .should("have.text", "Contagem: 1");
+    cy.get('[data-testid="increment"]').should("exist").click();
+    cy.get('[data-testid="increment"]').should("exist").click();
+    cy.get('[data-testid="count-value"]')
+      .should("exist")
+      .should("have.text", "Contagem: 3");
   });
 
   it("decrement the count", () => {
     cy.visit("http://localhost:3000/CountPage");
 
-    cy.contains("Decrement").should("exist").click();
-    cy.get("h4").should("exist").should("have.text", "Count: -1");
-    cy.contains("Decrement").should("exist").click();
-    cy.get("h4").should("exist").should("have.text", "Count: -2");
+    cy.get('[data-testid="decrement"]').should("exist").click();
+    cy.get('[data-testid="count-value"]')
+      .should("exist")
+      .should("have.text", "Contagem: -1");
+    cy.get('[data-testid="decrement"]').should("exist").click();
+    cy.get('[data-testid="count-value"]')
+      .should("exist")
+      .should("have.text", "Contagem: -2");
   });
 
   it("return to Home Page", () => {
     cy.visit("http://localhost:3000/CountPage");
 
-    cy.contains("Home Page").should("exist").click();
+    cy.get('[data-testid="homePage"]').should("exist").click();
     cy.url().should("include", "/");
   });
 });

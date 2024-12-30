@@ -24,18 +24,27 @@ export default function Count() {
 
   return (
     <div className={styles.customGrid}>
-      <h2>{t("countPage")}</h2>
-      <h4>{`${t("count")} ${value}`}</h4>
+      <h2 data-testid="count-page-title">{t("countPage")}</h2>
+      <h4 data-testid="count-value">{`${t("count")} ${value}`}</h4>
       <div
         data-testid="cypress-botton-container"
         className={styles.buttonContainer}
       >
-        <Button label={t("decrement")} onClick={handleDecrement} />
-        <Button label={t("increment")} onClick={handleIncrement} />
+        <Button
+          data-testid="decrement"
+          label={t("decrement")}
+          onClick={handleDecrement}
+        />
+        <Button
+          data-testid="increment"
+          label={t("increment")}
+          onClick={handleIncrement}
+        />
       </div>
       <Dropdown selectedLanguage={language} onChange={handleChangeLanguage} />
       <p>{`${t("currentLanguage")} ${language}`}</p>
       <Button
+        data-testid="homePage"
         label={t("homePage")}
         backgroundColor="danger"
         onClick={() => router.push("/")}
