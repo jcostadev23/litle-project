@@ -34,9 +34,6 @@ jobs:
         with:
           name: dependecies
 
-      - name: Check Jest installation
-        run: ls node_modules/.bin
-
       - name: Run jest testes
         run: npm run test
 
