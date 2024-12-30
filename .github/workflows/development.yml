@@ -23,11 +23,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependecies
+      - name: Intall dependencies
         run: npm ci
-
-      - name: Check Jest installation
-        run: ls node_modules/.bin
 
       - name: Run jest testes
         run: npm run test
@@ -47,6 +44,15 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Verify .next folder
+        run: ls -la .next
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: .next
 
   e2e-tests:
     runs-on: ubuntu-latest
