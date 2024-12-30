@@ -13,6 +13,9 @@ jobs:
       - name: Install dependecies
         run: npm ci
 
+      - name: Verify installed dependencies
+        run: ls -la node_modules && ls -la node_modules/.bin
+
       - name: Archive node_modules artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -33,6 +36,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node_modules
+          path: ./node_modules
+
+      - name: Verify restored dependencies
+        run: ls -la node_modules && ls -la node_modules/.bin
+
+      - name: Add node_modules/.bin to PATH
+        run: echo "PATH=$PWD/node_modules/.bin:$PATH" >> $GITHUB_ENV
 
       - name: Run jest testes
         run: npm run test
