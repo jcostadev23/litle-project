@@ -13,9 +13,6 @@ jobs:
       - name: Install dependecies
         run: npm ci
 
-      - name: Verify installed dependencies
-        run: ls -la node_modules && ls -la node_modules/.bin
-
       - name: Archive node_modules artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -33,13 +30,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependecies
-        uses: actions/download-artifact@v4
-        with:
-          name: dependecies
-          path: ./node_modules
-
-      - name: Verify restored dependencies
-        run: ls -la node_modules && ls -la node_modules/.bin
+        run: npm ci
 
       - name: Run jest testes
         run: npm run test
@@ -59,6 +50,12 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: .next/
 
   e2e-tests:
     runs-on: ubuntu-latest
