@@ -16,7 +16,7 @@ jobs:
       - name: Archive node_modules artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dependecies
+          name: node_modules
           path: node_modules/
 
   unit-tests:
@@ -30,6 +30,11 @@ jobs:
           node-version: 20
 
       - name: Install Dependecies
+        uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+
+      - name: Install dependecies
         run: npm ci
 
       - name: Run jest testes
