@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dependecies
-          path: node_modules
+          path: node_modules/
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -33,9 +33,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dependecies
-
-      - name: Restore node_modules
-        run: cp -r dependencies node_modules
+          path: ./node_modules
 
       - name: Run jest testes
         run: npm run test
