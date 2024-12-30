@@ -34,6 +34,9 @@ jobs:
         with:
           name: dependecies
 
+      - name: Restore node_modules
+        run: cp -r dependencies node_modules
+
       - name: Run jest testes
         run: npm run test
 
