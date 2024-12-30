@@ -13,6 +13,12 @@ jobs:
       - name: Install dependecies
         run: npm ci
 
+      - name: Archive node_modules artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependecies
+          path: node_modules
+
   unit-tests:
     runs-on: ubuntu-latest
     needs: install-dependencies
@@ -23,8 +29,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependecies
-        run: npm ci
+      - name: Install Dependecies
+        uses: actions/download-artifact@v4
+        with:
+          name: dependecies
 
       - name: Check Jest installation
         run: ls node_modules/.bin
