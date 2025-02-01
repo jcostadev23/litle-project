@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Intall Vercel CLI
-        run: npm install --global vercel
+        run: npm install --global vercel@canary
 
       - name: Pull vercel environment information
         run: vercel pull --yes --environment=production --token=${{secrets.VERCEL_TOKEN}}
@@ -25,4 +25,4 @@ jobs:
         run: vercel build --prod --token=${{secrets.VERCEL_TOKEN}}
 
       - name: Deploy Project Artifacts
-        run: vercel deploy --prebuild --token=${{secrets.VERCEL_TOKEN}}
+        run: vercel deploy --prebuild --prod --token=${{secrets.VERCEL_TOKEN}}
